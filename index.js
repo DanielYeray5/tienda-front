@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
     const getDataApi = async () => {
-        // Fetch conect with teh route that we use
+        // Fetch conect with the route that it use
         const response = await fetch('http://localhost:3000/api/v1')
         if (response.ok){
             // Extract all the data 
