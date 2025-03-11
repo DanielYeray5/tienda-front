@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <header class="bg-emerald-500 flex justify-center p-5 shadow-xl">
+        <img class="size-[40px]" src="./navi.svg" alt="logo">
+        <h1 class="text-3xl m-3 font-bold">Bimbo</h1>
+    </header>
+
+    <main class="flex justify-center flex-wrap flex-col lg:flex-row">
+
+        <form class="bg-teal-100 w-full pt-5 p-4 flex flex-wrap justify-center items-center">
+            <div class="bg-white rounded-lg p-5 shadow-md w-full max-w-lg">
+                <h2 class="invisible w-0">Productos</h2>
+                <div class="flex flex-col text-center w-full mb-4">
+                    <label for="">Nombre</label>
+                    <input class="text-center mx-2 border rounded m-3" type="text" placeholder="Pan tostado">
+                </div>
+                <div class="flex flex-col text-center w-full mb-4">
+                    <label for="">Precio</label>
+                    <input class="text-center mx-2 border rounded m-3" type="number" placeholder="$30.50">
+                </div>
+                <div class="flex flex-col text-center w-full mb-4">
+                    <label>Stock</label>
+                    <input class="text-center mx-2 border rounded m-3" type="number" placeholder="300">
+                </div>
+                <div class="flex justify-between">
+                    <button type="button" class="bg-red-500 text-white px-5 py-1 rounded hover:bg-red-700 transition duration-300"><i class="bi bi-x-square-fill"></i> Limpiar</button>
+                    <button type="submit" class="bg-teal-600 px-5 py-1 text-stone-50 rounded hover:bg-teal-700 transition duration-300"><i class="bi bi-plus-square"></i> Agregar</button>
+                </div>
+            </div>
+        </form>
+
+        <h2 class="flex felx-wrap justify-center mt-3">Lista de productos</h2>
+        <ul class="w-full flex flex-wrap justify-center items-center gap-4 mt-4" id="contenedor-cards">
+        </ul>
+        <script src="./index.js"></script>
+    </main>
+</body>
+</html>
