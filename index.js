@@ -52,7 +52,7 @@ const deleteProduct = async (id) =>{
         alert("Producto eliminado correctamente")
     }else{
         if(response.ok){
-            const respuesta = await response.json();
+            const respuestae = await response.json();
             alert(respuesta.message || "Ocurrio un error al intentar eliminar")
         }else{
             alert("Ocurrio un problema al comunicarse con el servidor. Intente de nuevo más tarde")
