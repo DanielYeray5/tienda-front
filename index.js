@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", (e) => {
+    e.preventDefault();
+
     const contenedorCards = document.getElementById('contenedor-cards');
     
 
