@@ -214,10 +214,6 @@
   .flex {
     display: flex;
   }
-  .size-\[40px\] {
-    width: 40px;
-    height: 40px;
-  }
   .w-0 {
     width: calc(var(--spacing) * 0);
   }
