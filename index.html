@@ -14,23 +14,23 @@
 
     <main class="flex justify-center flex-wrap flex-col lg:flex-row">
 
-        <form class="bg-teal-100 w-full pt-5 p-4 flex flex-wrap justify-center items-center">
+        <form id="formulario" class="bg-teal-100 w-full pt-5 p-4 flex flex-wrap justify-center items-center">
             <div class="bg-white rounded-lg p-5 shadow-md w-full max-w-lg">
                 <h2 class="invisible w-0">Productos</h2>
                 <div class="flex flex-col text-center w-full mb-4">
-                    <label for="">Nombre</label>
-                    <input class="text-center mx-2 border rounded m-3" type="text" placeholder="Pan tostado">
+                    <label for="nombre-input">Nombre</label>
+                    <input id="nombre-input" class="text-center mx-2 border rounded m-3" type="text" placeholder="Pan tostado">
                 </div>
                 <div class="flex flex-col text-center w-full mb-4">
-                    <label for="">Precio</label>
-                    <input class="text-center mx-2 border rounded m-3" type="number" placeholder="$30.50">
+                    <label for="precio-input">Precio</label>
+                    <input id="precio-input" class="text-center mx-2 border rounded m-3" type="number" placeholder="$30.50">
                 </div>
                 <div class="flex flex-col text-center w-full mb-4">
-                    <label>Stock</label>
-                    <input class="text-center mx-2 border rounded m-3" type="number" placeholder="300">
+                    <label for="stock-input">Stock</label>
+                    <input id="stock-input" class="text-center mx-2 border rounded m-3" type="number" placeholder="300">
                 </div>
                 <div class="flex justify-between">
-                    <button type="button" class="bg-red-500 text-white px-5 py-1 rounded hover:bg-red-700 transition duration-300"><i class="bi bi-x-square-fill"></i> Limpiar</button>
+                    <button id="boton" type="button" class="bg-red-500 text-white px-5 py-1 rounded hover:bg-red-700 transition duration-300"><i class="bi bi-x-square-fill"></i> Limpiar</button>
                     <button type="submit" class="bg-teal-600 px-5 py-1 text-stone-50 rounded hover:bg-teal-700 transition duration-300"><i class="bi bi-plus-square"></i> Agregar</button>
                 </div>
             </div>
