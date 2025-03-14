@@ -1,17 +1,56 @@
+var isUpdate = false;
+var id = null;
+
+const deleteProduct = async (id) =>{
+    const response = await fetch(`http://localhost:3000/api/v1/` + id,{
+            method : "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+    if(response.status == 204){
+        alert("Producto eliminado correctamente")
+        getDataApi();
+    }else{
+        if(response.ok){
+            const respuesta = await response.json();
+            alert(respuesta.message || "Ocurrio un error al intentar eliminar")
+        }else{
+            alert("Ocurrio un problema al comunicarse con el servidor. Intente de nuevo más tarde")
+        }
+    }
+}
+
+// Definir la función editProduct antes de su uso
+window.editProduct = (producto) => {
+    isUpdate = true;
+    id = producto.id;
+    nombreInput.value = producto.nombre;
+    precioInput.value = producto.precio;
+    stockInput.value = producto.stock;
+}
+
 document.addEventListener("DOMContentLoaded", (e) => {
     e.preventDefault();
 
     const contenedorCards = document.getElementById('contenedor-cards');
-    
+    const formulario = document.getElementById('formulario');
+    const nombreInput = document.getElementById('nombre-input');
+    const precioInput = document.getElementById('precio-input');
+    const stockInput = document.getElementById('stock-input');
+    const btnLimpiar = document.getElementById('btn-limpiar');
+
+    btnLimpiar.addEventListener("click", ()=>{
+        formulario.reset()
+        isUpdate = false
+        id = null;
+    })
 
     const getDataApi = async () => {
-        // Fetch conect with the route that it use
         const response = await fetch('http://localhost:3000/api/v1')
         if (response.ok){
-            // Extract all the data 
             const productos = await response.json();
             contenedorCards.innerHTML='';
-            // Map is to search all the elememts in productos
             productos.map(producto=>{
                 contenedorCards.innerHTML += `
                 <li class="w-5/12 md:w-3/12 lg:w-2/10 p-3 rounded shadow-lg hover:bg-amber-100 hover:shadow-xl hover:scale-105 transition ease-in-out duration-300">
@@ -23,7 +62,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
                 <p class="block text-sm text-gray-500 mb-2">${producto.stock}</p>
                 <div class="flex justify-between">
 
-                <button 
+                <button onclick='editProduct(${JSON.stringify(producto)})'
                 class="flex-1 bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700 transition duration-200">
                 <i class="bi bi-pencil-square"></i> Editar
                 </button>
@@ -37,26 +76,49 @@ document.addEventListener("DOMContentLoaded", (e) => {
             });
         }
     }
-    getDataApi();
-})
 
-const deleteProduct = async (id) =>{
-    const responde = await fetch(`http://localhost:3000/api/v1/` + id,{
-            method : "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            //* body: JSON.stringify({saludo: "hola"})
-        });
-    if(responde.status == 204){
-        alert("Producto eliminado correctamente")
-    }else{
-        if(response.ok){
-            const respuestae = await response.json();
-            alert(respuesta.message || "Ocurrio un error al intentar eliminar")
+    const createProduct = async (e) =>{
+        e.preventDefault();
+        const nombre = nombreInput.value;
+        const precio = precioInput.value;
+        const stock = stockInput.value;
+        const nuevoProducto = {nombre, precio, stock};
+    
+        if(!isUpdate){
+            const response = await fetch('http://localhost:3000/api/v1',{
+                method : "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(nuevoProducto)
+            });
+            if(response.status == 201){
+                alert("Producto creado correctamente")
+                formulario.reset();
+                getDataApi();
+            }else{
+                alert("Ocurrio un problema al agregar el producto")
+            }
         }else{
-            alert("Ocurrio un problema al comunicarse con el servidor. Intente de nuevo más tarde")
+            const response = await fetch(`http://localhost:3000/api/v1/${id}`,{
+                method : "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(nuevoProducto)
+            });
+            if (response.ok){
+                alert("Producto actualizado correctamente")
+                formulario.reset();
+                isUpdate = false;
+                id = null;
+                getDataApi();
+            }else{
+                alert("Ocurrio un problema al actualizar el producto")
+            }
         }
     }
+    formulario.addEventListener("submit", createProduct);
+    getDataApi();
+});
 
-}
